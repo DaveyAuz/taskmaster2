@@ -3,6 +3,7 @@ package com.portalcode.taskmaster2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,6 +17,7 @@ import com.portalcode.taskmaster2.activities.AddTasksActivity;
 import com.portalcode.taskmaster2.activities.AllTasksActivity;
 import com.portalcode.taskmaster2.activities.TaskDetailActivity;
 
+
 public class MainActivity extends AppCompatActivity {
 
     public String TAG = "MainActivity";
@@ -24,8 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // super and setContentView needs to remain at the top
+        // setContentView creates all of your UI elements.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
