@@ -8,9 +8,10 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addTasksButtonMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:text="Add Tasks"
         android:textColorHighlight="#FFE600"
         android:textColorLink="#FF5900"
@@ -33,10 +34,10 @@
         app:layout_constraintVertical_bias="0.132" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/allTasksButtonMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="72dp"
+        android:layout_marginEnd="16dp"
         android:text="All Tasks"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="610dp" />
