@@ -16,13 +16,15 @@ import android.widget.TextView;
 import com.portalcode.taskmaster2.activities.AddTasksActivity;
 import com.portalcode.taskmaster2.activities.AllTasksActivity;
 import com.portalcode.taskmaster2.activities.TaskDetailActivity;
+import com.portalcode.taskmaster2.activities.SettingsActivity;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    public String TAG = "MainActivity";
-    public static String TASK_DETAIL_TITLE_TAG = "TASK DETAIL TITLE";
-    SharedPreferences preferences;
+    public static final String TAG = "MainActivity";
+    public static final String TASK_DETAIL_TITLE_TAG = "TASK DETAIL TITLE";
+
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,76 +36,54 @@ public class MainActivity extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        addTaskNavigationButton();
-        allTasksNavigationButton();
-        settingsNavigationButton();
-        taskOneButton();
-        taskTwoButton();
-        taskThreeButton();
+        setupButton(R.id.addTasksButtonMainActivity, AddTasksActivity.class);
+        setupButton(R.id.allTasksButtonMainActivity, AllTasksActivity.class);
+        setupImageButton(R.id.imageViewSettingsIconMainActivity, SettingsActivity.class);
+        setupTaskButton(R.id.textViewTaskOneMainActivity, "Finish Java Assignment");
+        setupTaskButton(R.id.textViewTaskTwoMainActivity, "Walk Dog!");
+        setupTaskButton(R.id.textViewTaskThreeMainActivity, "Clean Dishes!");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         String userNickname = preferences.getString(SettingsActivity.USER_NAME_TAG, "No nickname");
-        ((TextView)findViewById(R.id.textViewUsernameMainActivity))
-                .setText(getString(R.string.nickname_main_activity, userNickname));
+        TextView usernameTextView = findViewById(R.id.textViewUsernameMainActivity);
+        usernameTextView.setText(getString(R.string.nickname_main_activity, userNickname));
     }
 
-    public void addTaskNavigationButton() {
-        Button buttonToAddTasksPage = findViewById(R.id.addTasksButtonMainActivity);
-        buttonToAddTasksPage.setOnClickListener(new View.OnClickListener() {
+    private void setupButton(int buttonId, final Class<?> targetActivityClass) {
+        Button button = findViewById(buttonId);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("submitted!");
                 Log.e(TAG, "Logging");
-
-                Intent goToAddTasksPage = new Intent(MainActivity.this, AddTasksActivity.class);
-                startActivity(goToAddTasksPage);
+                Intent intent = new Intent(MainActivity.this, targetActivityClass);
+                startActivity(intent);
             }
         });
     }
 
-    public void allTasksNavigationButton() {
-        Button buttonToAllTasksPage = findViewById(R.id.allTasksButtonMainActivity);
-        buttonToAllTasksPage.setOnClickListener(new View.OnClickListener() {
+    private void setupImageButton(int buttonId, final Class<?> targetActivityClass) {
+        ImageButton imageButton = findViewById(buttonId);
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("submitted!");
                 Log.e(TAG, "Logging");
-
-                Intent goToAllTasksPage = new Intent(MainActivity.this, AllTasksActivity.class);
-                startActivity(goToAllTasksPage);
+                Intent intent = new Intent(MainActivity.this, targetActivityClass);
+                startActivity(intent);
             }
         });
     }
 
-    public void settingsNavigationButton() {
-        ImageButton imageButtonToSettingsPage = findViewById(R.id.imageViewSettingsIconMainActivity);
-        imageButtonToSettingsPage.setOnClickListener(new View.OnClickListener() {
+    private void setupTaskButton(int buttonId, final String taskTitle) {
+        TextView taskButton = findViewById(buttonId);
+        taskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("submitted!");
                 Log.e(TAG, "Logging");
-
-                Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(goToSettings);
-            }
-        });
-    }
-
-    public void taskOneButton() {
-        TextView taskOneToTaskPage = findViewById(R.id.textViewTaskOneMainActivity);
-        taskOneToTaskPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("submitted!");
-                Log.e(TAG, "Logging");
-
-                Intent goToTaskOneDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
-                startActivity(goToTaskOneDetails);
-                String taskTitle = "Finish Java Assignment";
+                Intent intent = new Intent(MainActivity.this, TaskDetailActivity.class);
+                startActivity(intent);
                 SharedPreferences.Editor preferenceEditor = preferences.edit();
                 preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
                 preferenceEditor.apply();
@@ -111,42 +91,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void taskTwoButton() {
-        TextView taskTwoToTaskPage = findViewById(R.id.taskViewTaskTwoMainActivity);
-        taskTwoToTaskPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("submitted!");
-                Log.e(TAG, "Logging");
-
-                Intent goToTaskTwoDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
-                startActivity(goToTaskTwoDetails);
-                String taskTitle = "Walk Dog!";
-                SharedPreferences.Editor preferenceEditor = preferences.edit();
-                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
-                preferenceEditor.apply();
-            }
-        });
-    }
-
-    public void taskThreeButton() {
-        TextView taskThreeToTaskPage = findViewById(R.id.textViewTaskThreeMainActivity);
-        taskThreeToTaskPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("submitted!");
-                Log.e(TAG, "Logging");
-
-                Intent goToTaskThreeDetails = new Intent(MainActivity.this, TaskDetailActivity.class);
-                startActivity(goToTaskThreeDetails);
-                String taskTitle = "Clean Dishes!";
-                SharedPreferences.Editor preferenceEditor = preferences.edit();
-                preferenceEditor.putString(TASK_DETAIL_TITLE_TAG, taskTitle);
-                preferenceEditor.apply();
-            }
-        });
-    }
-
-    // Add the new methods for the added features
+    // Add the new methods for the added features here
 
 }

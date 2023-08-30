@@ -6,4 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".activities.AddTasksActivity">
 
+    <Button
+        android:id="@+id/addTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Task"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Task Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTaskButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

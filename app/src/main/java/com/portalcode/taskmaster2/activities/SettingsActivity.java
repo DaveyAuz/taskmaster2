@@ -15,8 +15,7 @@ import com.portalcode.taskmaster2.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    // create a string for logging
-    public String TAG = "SettingsActivity";
+    public static final String TAG = "SettingsActivity";
     public static final String USER_NAME_TAG = "userNickname";
     SharedPreferences preferences;
 
@@ -25,7 +24,6 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // need to set preferences outside of the onClick() function because of the "this" context.
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         setUserNickname();
@@ -35,26 +33,27 @@ public class SettingsActivity extends AppCompatActivity {
     public void setUserNickname() {
         String userNickname = preferences.getString(USER_NAME_TAG, "");
         if (!userNickname.isEmpty()) {
-            EditText userNameEditText = findViewById(R.id.editTextUsernameSettingsActivity);
+            EditText userNameEditText = findViewById(R.id.editTextUsernameSettings);
             userNameEditText.setText(userNickname);
         }
     }
 
     public void saveUserNickname() {
-        Button buttonToSaveUsername = findViewById(R.id.buttonSaveUsernameSettingsActivity);
+        Button buttonToSaveUsername = findViewById(R.id.buttonSaveUsernameSettings);
         buttonToSaveUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("saved!");
                 Log.e(TAG, "Logging");
 
-                // save username from edit text box, which gets passed to MainActivity
                 SharedPreferences.Editor preferencesEditor = preferences.edit();
-                EditText userNameEditText = findViewById(R.id.editTextUsernameSettingsActivity);
+                EditText userNameEditText = findViewById(R.id.editTextUsernameSettings);
                 String userNicknameString = userNameEditText.getText().toString();
                 preferencesEditor.putString(USER_NAME_TAG, userNicknameString);
                 preferencesEditor.apply();
-                ((TextView) findViewById(R.id.textViewSavedSettingsActivity)).setText(getString(R.string.save));
+
+                TextView savedTextView = findViewById(R.id.textViewSavedSettings);
+                savedTextView.setText(getString(R.string.saved_settings_activity, userNicknameString));
+
             }
         });
     }
