@@ -11,8 +11,7 @@ import com.portalcode.taskmaster2.R;
 
 public class TaskDetailActivity extends AppCompatActivity {
 
-    // create a string for logging
-    public String TAG = "taskDetailActivity";
+    public static final String TAG = "TaskDetailActivity";
     SharedPreferences preferences;
 
     @Override
@@ -23,10 +22,10 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        String taskTitle = preferences.getString(MainActivity.TASK_DETAIL_TITLE_TAG, "Empty");
-        ((TextView) findViewById(R.id.textViewTaskTitleDetailsActivity))
-                .setText(getString(R.string.task_title, taskTitle));
+        String taskTitle = preferences.getString("TASK DETAIL TITLE", "Empty");
+        TextView taskTitleTextView = findViewById(R.id.textViewTaskTitleDetailsActivity);
+        taskTitleTextView.setText(getString(R.string.task_title, taskTitle));
     }
 }

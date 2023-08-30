@@ -19,13 +19,14 @@ public class AddTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tasks);
 
-        Button submitButton = findViewById(R.id.addTaskButton)
+        Button submitButton = findViewById(R.id.addTaskButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 System.out.println("submitted!");
                 Log.d(TAG, "Logging");
-            ((TextView) view.findViewById(R.id.textViewSubmit)).setText(R.string.submitted);
-        }
-    });
-}
+                ((TextView) findViewById(R.id.textViewSubmit)).setText(R.string.submitted);
+            }
+        });
+    }
 }

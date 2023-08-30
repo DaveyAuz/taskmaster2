@@ -2,6 +2,10 @@
     <string name="app_name">taskmaster2</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <!-- Strings used for fragments for navigation -->
+    <string name="saved_settings_activity">Saved %1$s</string>
+    <string name="task_title">Task Title: %s</string>
+    <string name="nickname_main_activity">Nickname: %s</string>
+    <string name="submitted">Submitted</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
@@ -43,4 +47,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="all_tasks">All Tasks</string>
+    <string name="task_sorting_application">TASK SORTING APPLICATION</string>
 </resources>
