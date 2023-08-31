@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,6 +27,7 @@ import com.portalcode.taskmaster2.adapter.TaskListRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
         // setContentView creates all of your UI elements.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
         // Initialization
+        taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
+      
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
