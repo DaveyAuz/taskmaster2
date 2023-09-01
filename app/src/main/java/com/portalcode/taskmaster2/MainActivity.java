@@ -121,7 +121,7 @@ protected void onCreate(Bundle savedInstanceState) {
             public void onClick(View view) {
                 Log.d(TAG, "Logging");
                 // target textview and change what gets printed to that view- don't hardcode values, set values in the string.xml file.
-                //((TextView)findViewById(R.id.totalTasksTextView)).setText(R.string.submitted);
+                
                 // use intent to navigate to different pages
                 // Intent has two arguments: the context where you're coming from (aka the source Activity), and the place where you're going (the destination Activity)
                 Intent intent = new Intent(MainActivity.this, AddTasksActivity.class);
