@@ -3,10 +3,9 @@ package com.portalcode.taskmaster2;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room; // Import Room package
 
-import android.app.AlertDialog;
 import android.content.Intent;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,18 +15,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.portalcode.taskmaster2.models.Task;
-import com.portalcode.taskmaster2.models.State;
-
-
 import com.portalcode.taskmaster2.activities.AddTasksActivity;
-import com.portalcode.taskmaster2.activities.TaskDetailActivity;
 import com.portalcode.taskmaster2.activities.SettingsActivity;
 import com.portalcode.taskmaster2.adapter.TaskListRecyclerViewAdapter;
+import com.portalcode.taskmaster2.database.TaskMasterDatabase;
+import com.portalcode.taskmaster2.models.Task;
+import com.portalcode.taskmaster2.activities.TaskDetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,43 +33,39 @@ public class MainActivity extends AppCompatActivity {
     public static final String TASK_DETAIL_TITLE_TAG = "TASK DETAIL TITLE";
 
     SharedPreferences preferences;
-
     //Create and attach the RV Adapter
     TaskListRecyclerViewAdapter taskListRecyclerViewAdapter;
-    List<Task> taskArrayList = new ArrayList<>();
+    TaskMasterDatabase taskMasterDatabase;
+    List<Task> taskArrayList = null;
 
 //    private SharedPreferences preferences;
+// super and setContentView needs to remain at the top
+// setContentView creates all of your UI elements.
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    // Initialize RecyclerView Adapter
+    taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // super and setContentView needs to remain at the top
-        // setContentView creates all of your UI elements.
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // Initialization
-        taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
-      
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+    // Initialize SharedPreferences
+    preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+    // Initialize Room database
+    taskMasterDatabase = Room.databaseBuilder(
+            getApplicationContext(),
+            TaskMasterDatabase.class,
+            "task_master_database"
+    ).allowMainThreadQueries().build(); // Note: avoid running on main thread in production
+    taskArrayList = taskMasterDatabase.taskDao().findAll();
 
-        Log.d(TAG, "onCreate() got called!");
+//        Log.d(TAG, "onCreate() got called!");
 
         addTaskNavigationButton();
         allTasksNavigationButton();
         settingsNavigationButton();
         taskListRecyclerView();
-
-//        taskListRecyclerView.setAdapter(taskListRecyclerViewAdapter);
-}
-
-//        setupButton(R.id.addTasksButtonMainActivity, AddTasksActivity.class);
-//        setupButton(R.id.allTasksButtonMainActivity, AllTasksActivity.class);
-//        setupImageButton(R.id.imageViewSettingsIconMainActivity, SettingsActivity.class);
-//        setupTaskButton(R.id.textViewTaskOneMainActivity, "Finish Java Assignment");
-//        setupTaskButton(R.id.textViewTaskTwoMainActivity, "Walk Dog!");
-//        setupTaskButton(R.id.textViewTaskThreeMainActivity, "Clean Dishes!");
-//        setupTaskButton(R.id.textViewTaskFourMainActivity, "Do Laundry!");
-
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -160,12 +151,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void settingsNavigationButton() {
-        ImageButton imageButtonToSettingsPage = findViewById(R.id.imageViewSettingsIconMainActivity);
-        imageButtonToSettingsPage.setOnClickListener(new View.OnClickListener() {
+    public void settingsNavigationButton()
+    {
+        ImageButton imageButtonToSettingsPage = (ImageButton) findViewById(R.id.imageViewSettingsIconMainActivity);
+        imageButtonToSettingsPage.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                Log.d(TAG, "Logging");
+            public void onClick(View view)
+            {
                 Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(goToSettings);
             }
@@ -179,17 +172,17 @@ public class MainActivity extends AppCompatActivity {
         //for horizontal layout
         // ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        taskArrayList.add((new Task("Assignment", "Finish Java Assignment", State.NEW)));
-        taskArrayList.add((new Task("Dog", "Walk Dog!", State.COMPLETE)));
-        taskArrayList.add((new Task("Dishes", "Clean Dishes!", State.IN_PROGRESS)));
-        taskArrayList.add((new Task("Laundry", "Do Laundry!", State.NEW)));
-        taskArrayList.add((new Task("Groceries", "Buy Groceries!", State.COMPLETE)));
-        taskArrayList.add((new Task("Dinner", "Make Pizza From Scratch!", State.IN_PROGRESS)));
-        taskArrayList.add((new Task("Game", "Level up twice in Elden Ring", State.IN_PROGRESS)));
-        taskArrayList.add((new Task("Exercise", "Swim across cove", State.COMPLETE)));
-        taskArrayList.add((new Task("Clean Truck", "Clean out Truck", State.NEW)));
-        taskArrayList.add((new Task("Read", "Read Clean Code", State.IN_PROGRESS)));
-        taskArrayList.add((new Task("Work", "Finish all work tasks", State.IN_PROGRESS)));
+//        taskArrayList.add((new Task("Assignment", "Finish Java Assignment", State.NEW)));
+//        taskArrayList.add((new Task("Dog", "Walk Dog!", State.COMPLETE)));
+//        taskArrayList.add((new Task("Dishes", "Clean Dishes!", State.IN_PROGRESS)));
+//        taskArrayList.add((new Task("Laundry", "Do Laundry!", State.NEW)));
+//        taskArrayList.add((new Task("Groceries", "Buy Groceries!", State.COMPLETE)));
+//        taskArrayList.add((new Task("Dinner", "Make Pizza From Scratch!", State.IN_PROGRESS)));
+//        taskArrayList.add((new Task("Game", "Level up twice in Elden Ring", State.IN_PROGRESS)));
+//        taskArrayList.add((new Task("Exercise", "Swim across cove", State.COMPLETE)));
+//        taskArrayList.add((new Task("Clean Truck", "Clean out Truck", State.NEW)));
+//        taskArrayList.add((new Task("Read", "Read Clean Code", State.IN_PROGRESS)));
+//        taskArrayList.add((new Task("Work", "Finish all work tasks", State.IN_PROGRESS)));
 
         //hand in data items
 
