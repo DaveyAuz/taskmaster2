@@ -33,27 +33,26 @@ public class SettingsActivity extends AppCompatActivity {
     public void setUserNickname() {
         String userNickname = preferences.getString(USER_NAME_TAG, "");
         if (!userNickname.isEmpty()) {
-            EditText userNameEditText = findViewById(R.id.editTextUsernameSettings);
+            EditText userNameEditText = findViewById(R.id.editTextUsernameSettingsActivity);
             userNameEditText.setText(userNickname);
         }
     }
 
     public void saveUserNickname() {
-        Button buttonToSaveUsername = findViewById(R.id.buttonSaveUsernameSettings);
+        Button buttonToSaveUsername = findViewById(R.id.buttonSaveUsernameSettingsActivity);
         buttonToSaveUsername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.e(TAG, "Logging");
 
                 SharedPreferences.Editor preferencesEditor = preferences.edit();
-                EditText userNameEditText = findViewById(R.id.editTextUsernameSettings);
+                EditText userNameEditText = findViewById(R.id.editTextUsernameSettingsActivity);
                 String userNicknameString = userNameEditText.getText().toString();
                 preferencesEditor.putString(USER_NAME_TAG, userNicknameString);
                 preferencesEditor.apply();
 
-                TextView savedTextView = findViewById(R.id.textViewSavedSettings);
+                TextView savedTextView = findViewById(R.id.textViewSavedSettingsActivity);
                 savedTextView.setText(getString(R.string.saved_settings_activity, userNicknameString));
-
             }
         });
     }

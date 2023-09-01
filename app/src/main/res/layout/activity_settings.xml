@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,34 +7,53 @@
     tools:context=".activities.SettingsActivity">
 
     <EditText
-        android:id="@+id/editTextUsernameSettings"
+        android:id="@+id/editTextUsernameSettingsActivity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="Enter your username"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Enter Username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonSaveUsernameSettings"
+        android:id="@+id/buttonSaveUsernameSettingsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUsernameSettings"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameSettings" />
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="384dp"
+        android:text="save username"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewSavedSettings"
+        android:id="@+id/textViewSavedSettingsActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintTop_toBottomOf="@+id/buttonSaveUsernameSettings"
-        app:layout_constraintStart_toStartOf="@+id/buttonSaveUsernameSettings" />
+        android:layout_marginBottom="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-
+    <TextView
+        android:id="@+id/textViewUsernameLabelSettingsActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:text="Nickname"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUsernameSettingsActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
