@@ -124,8 +124,8 @@
         tools:layout_editor_absoluteX="75dp"
         tools:layout_editor_absoluteY="363dp" />
 
-    <ImageView
-        android:id="@+id/imageViewSettingsIconMainActivity"
+    <ImageButton
+        android:id="@+id/imageButtonSettingsIconMainActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="188dp"

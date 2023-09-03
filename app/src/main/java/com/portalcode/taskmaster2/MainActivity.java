@@ -38,26 +38,26 @@ public class MainActivity extends AppCompatActivity {
     TaskMasterDatabase taskMasterDatabase;
     List<Task> taskArrayList = null;
 
-//    private SharedPreferences preferences;
+    //    private SharedPreferences preferences;
 // super and setContentView needs to remain at the top
 // setContentView creates all of your UI elements.
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    // Initialize RecyclerView Adapter
-    taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // Initialize RecyclerView Adapter
+        taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
 
-    // Initialize SharedPreferences
-    preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        // Initialize SharedPreferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-    // Initialize Room database
-    taskMasterDatabase = Room.databaseBuilder(
-            getApplicationContext(),
-            TaskMasterDatabase.class,
-            "task_master_database"
-    ).allowMainThreadQueries().build(); // Note: avoid running on main thread in production
-    taskArrayList = taskMasterDatabase.taskDao().findAll();
+        // Initialize Room database
+        taskMasterDatabase = Room.databaseBuilder(
+                getApplicationContext(),
+                TaskMasterDatabase.class,
+                "task_master_database"
+        ).allowMainThreadQueries().build(); // Note: avoid running on main thread in production
+        taskArrayList = taskMasterDatabase.taskDao().findAll();
 
 //        Log.d(TAG, "onCreate() got called!");
 
@@ -66,6 +66,7 @@ protected void onCreate(Bundle savedInstanceState) {
         settingsNavigationButton();
         taskListRecyclerView();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -121,7 +122,7 @@ protected void onCreate(Bundle savedInstanceState) {
             public void onClick(View view) {
                 Log.d(TAG, "Logging");
                 // target textview and change what gets printed to that view- don't hardcode values, set values in the string.xml file.
-                
+
                 // use intent to navigate to different pages
                 // Intent has two arguments: the context where you're coming from (aka the source Activity), and the place where you're going (the destination Activity)
                 Intent intent = new Intent(MainActivity.this, AddTasksActivity.class);
@@ -151,26 +152,31 @@ protected void onCreate(Bundle savedInstanceState) {
         });
     }
 
-    public void settingsNavigationButton()
-    {
-        ImageButton imageButtonToSettingsPage = (ImageButton) findViewById(R.id.imageViewSettingsIconMainActivity);
-        imageButtonToSettingsPage.setOnClickListener(new View.OnClickListener()
-        {
+    public void settingsNavigationButton() {
+        ImageButton settingsButton = findViewById(R.id.imageButtonSettingsIconMainActivity);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(goToSettings);
             }
         });
-    }
+//        {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                Intent goToSettings = new Intent(MainActivity.this, SettingsActivity.class);
+//                startActivity(goToSettings);
+//            }
+//        });
+//    }
 
-    public void taskListRecyclerView() {
-        RecyclerView taskListRecyclerView = findViewById(R.id.recyclerViewTaskListMainActivity);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        taskListRecyclerView.setLayoutManager(layoutManager);
-        //for horizontal layout
-        // ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
+        public void taskListRecyclerView () {
+            RecyclerView taskListRecyclerView = findViewById(R.id.recyclerViewTaskListMainActivity);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            taskListRecyclerView.setLayoutManager(layoutManager);
+            //for horizontal layout
+            // ((LinearLayoutManager) layoutManager).setOrientation(LinearLayoutManager.HORIZONTAL);
 
 //        taskArrayList.add((new Task("Assignment", "Finish Java Assignment", State.NEW)));
 //        taskArrayList.add((new Task("Dog", "Walk Dog!", State.COMPLETE)));
@@ -184,10 +190,11 @@ protected void onCreate(Bundle savedInstanceState) {
 //        taskArrayList.add((new Task("Read", "Read Clean Code", State.IN_PROGRESS)));
 //        taskArrayList.add((new Task("Work", "Finish all work tasks", State.IN_PROGRESS)));
 
-        //hand in data items
+            //hand in data items
 
-        taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
-        taskListRecyclerView.setAdapter(taskListRecyclerViewAdapter);
+            taskListRecyclerViewAdapter = new TaskListRecyclerViewAdapter(taskArrayList, this);
+            taskListRecyclerView.setAdapter(taskListRecyclerViewAdapter);
+        }
+
     }
-
 }
