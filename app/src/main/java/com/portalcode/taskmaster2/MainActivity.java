@@ -169,9 +169,9 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(goToSettings);
 //            }
 //        });
-//    }
+   }
 
-        public void taskListRecyclerView () {
+        public void taskListRecyclerView() {
             RecyclerView taskListRecyclerView = findViewById(R.id.recyclerViewTaskListMainActivity);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
             taskListRecyclerView.setLayoutManager(layoutManager);
@@ -197,4 +197,4 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-}
+
