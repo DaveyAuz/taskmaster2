@@ -67,12 +67,12 @@ public class MainActivityEspressoTest {
 
     @Test
     public void setNicknameTest() {
-        // Your existing setNicknameTest code goes here
+        // existing setNicknameTest code goes here
 
         // For example:
         // Espresso.onView(ViewMatchers.withId(R.id.imageViewSettingsIconMainActivity))
         //         .perform(ViewActions.click());
 
-        // Add the rest of your setNicknameTest code here
+        // Add the rest of setNicknameTest code here
     }
 }
