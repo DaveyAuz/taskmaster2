@@ -1,10 +1,10 @@
 package com.portalcode.taskmaster2;
 
-import androidx.test.runner.AndroidJUnit4;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
@@ -17,8 +17,8 @@ import org.junit.runner.RunWith;
 public class MainActivityEspressoTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
-
+   public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+    // No replacement for Rule here. We'll directly launch the Activity in each test method.
     @Test
     public void testDisplayUIElements() {
         // Assert that important UI elements are displayed on the page
@@ -41,7 +41,7 @@ public class MainActivityEspressoTest {
     public void testTaskNavigation() {
         // Tap on a task and assert that the resulting activity displays the name of that task
         Espresso.onView(ViewMatchers.withId(R.id.recyclerViewTaskListMainActivity))
-                .perform(ViewActions.click()); // Replace with the appropriate RecyclerView item
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, ViewActions.click()));// Replace with the appropriate RecyclerView item
 
         Espresso.onView(ViewMatchers.withText("Task Title")) // Replace with the expected task title
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
