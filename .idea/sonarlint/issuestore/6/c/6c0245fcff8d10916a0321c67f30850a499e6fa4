@@ -1,0 +1,9 @@
+
+D
+java:S18746".Remove this use of "<init>"; it is deprecated.(¾íŠ‰
+e
+java:S1874B"JDon't override a deprecated method or explicitly mark it as "@Deprecated".( ÷¼ÿÿÿÿÿ
+J
+java:S1874F"/Remove this use of "execute"; it is deprecated.( å«ûÿÿÿÿ
+Q	java:S125g"<This block of commented-out lines of code should be removed.(à˜Î‰
+Q	java:S125i"<This block of commented-out lines of code should be removed.(»æ—£
